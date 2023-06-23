@@ -2,6 +2,7 @@ import { View, Text, FlatList, StyleSheet, TextInput, SafeAreaView, } from 'reac
 import React, { useEffect, useState } from 'react'
 import CoinItem from './components/CoinItem'
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import { useFonts } from 'expo-font';
 const App = () => {
   const [coins, setCoins] = useState([])
   const [search, setsearch] = useState('')
@@ -23,12 +24,14 @@ const App = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>CryptoMarket</Text>
-        
+        <View style={styles.containerInput}>
+        <AntDesign name='search1' style={styles.searchIcon}/>
         <TextInput style={styles.searchInput}
         placeholder="Search a coin"
         placeholderTextColor="#ffffff"
         onChangeText={text => setsearch(text.toLowerCase())}
         />
+        </View>
       </View>
       <FlatList style={styles.list}
         data={coins.filter((coin) => coin.name.toLowerCase().includes(search) || coin.symbol.toLowerCase().includes(search)) }
@@ -59,13 +62,15 @@ const styles = StyleSheet.create({
   title: {
     color: '#fff',
     marginTop: 10,
-    fontSize: 20
+    fontSize: 20,
+    fontWeight: "700"
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '90%',
-    marginBottom: 10
+    width: '100%',
+    marginBottom: 10,
+    padding: 10
   },
   searchInput: {
     color: "#fff",
@@ -73,6 +78,17 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     width: "40%",
     textAlign: "center",
+  },
+  searchIcon: {
+    color: 'white',
+    fontSize: 20,
+    marginRight: 0,
+  },
+  containerInput: {
+    flexDirection: "row",
+    width: '100%',
+    alignItems: "center",
+    marginLeft: '20%'
   },
 })
 export default App
